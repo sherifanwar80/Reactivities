@@ -23,7 +23,18 @@ export default class ActivityStore {
             Date.parse(a.date) - Date.parse(b.date));
     }
 
-    
+    //reduce((previousValue, currentValue, currentIndex, array) => { /* ... */ }, initialValue)
+    //the return type is object [string, Activity[]][]
+    get groupedActivities() {
+        let grouped = Object.entries(
+            this.activitiesByDate.reduce((activities, activity) => {
+                const date = activity.date;
+                activities[date] = activities[date] ? [...activities[date], activity] : [activity];
+                return activities;
+            }, {} as {[key: string]: Activity[]})
+        );
+        return grouped;
+    }
     /*****************Actions******************/
     //Reactions : wrap promises in runInAction arrow function
     loadActivities = async () => {
