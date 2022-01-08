@@ -1,6 +1,7 @@
 using Application.Activities;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
@@ -17,8 +18,8 @@ namespace API.Controllers
         public async Task<IActionResult> GetActivity(Guid id)
         {
             //return await _context.Activities.FindAsync(id);
-            var result = await Mediator.Send(new Details.Query{ Id = id });
-            return HandleResult(result);
+            // var result = await Mediator.Send(new Details.Query{ Id = id });
+            return HandleResult(await Mediator.Send(new Details.Query{ Id = id }));
             // var activity = await Mediator.Send(new Details.Query{ Id = id });
             // if (activity == null)
             //     return NotFound();
