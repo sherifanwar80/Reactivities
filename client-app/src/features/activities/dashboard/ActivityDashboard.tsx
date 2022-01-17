@@ -19,7 +19,7 @@ export default observer(function ActivityDashboard() {
     }, [activityRegistry.size, loadActivities]);
 
     if (loadingInitial)
-        return <LoadingCompmonent content='Loading...' />
+        return <LoadingCompmonent content='Loading activities...' />
 
     return(
         <Grid>
